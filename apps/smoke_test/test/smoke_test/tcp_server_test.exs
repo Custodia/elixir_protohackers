@@ -1,6 +1,5 @@
 defmodule SmokeTest.TcpServerTest do
   use ExUnit.Case
-  import ExUnit.CaptureLog
 
   test "writes everything received back after client closes write socket" do
     {:ok, socket} = :gen_tcp.connect(~c"localhost", 4000, mode: :binary, active: false)
