@@ -41,10 +41,13 @@ defmodule SmokeTest.TcpServer do
   def handle_continue(:accept, %__MODULE__{} = state) do
     case :gen_tcp.accept(state.listen_socket) do
       {:ok, socket} ->
-        Task.Supervisor.start_child(
-          SmokeTest.TcpServerTaskSupervisor,
-          fn -> handle_connection(socket) end
-        )
+        {:ok, task_pid} =
+          Task.Supervisor.start_child(
+            SmokeTest.TcpServerTaskSupervisor,
+            fn -> handle_connection(socket) end
+          )
+        :gen_tcp.controlling_process(socket, task_pid)
+
         {:noreply, state, {:continue, :accept}}
 
       {:error, reason} ->
