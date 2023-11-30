@@ -6,7 +6,7 @@ defmodule SmokeTest.TcpServer do
 
   require Logger
 
-  defstruct [:listen_socket, :supervisor]
+  defstruct [:listen_socket]
 
   @port 4000
 
@@ -16,8 +16,6 @@ defmodule SmokeTest.TcpServer do
 
   @impl true
   def init(:no_state) do
-    {:ok, supervisor} = Task.Supervisor.start_link(max_children: 100)
-
     listen_options = [
       mode: :binary,
       active: false,
@@ -29,7 +27,7 @@ defmodule SmokeTest.TcpServer do
     case :gen_tcp.listen(@port, listen_options) do
       {:ok, listen_socket} ->
         Logger.info("Starting SmokeTest server on #{@port}")
-        state = %__MODULE__{ listen_socket: listen_socket, supervisor: supervisor }
+        state = %__MODULE__{ listen_socket: listen_socket }
         {:ok, state, {:continue, :accept}}
 
       {:error, reason} ->
