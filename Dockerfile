@@ -21,7 +21,7 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
 FROM ${BUILDER_IMAGE} AS builder
 
-ARG APPLICATION="smoke_test"
+ARG APPLICATION="prime_time"
 
 # Set env variables
 ENV MIX_ENV="prod"
@@ -57,7 +57,7 @@ RUN mix release ${APPLICATION}
 
 FROM ${RUNNER_IMAGE}
 
-ENV APPLICATION="smoke_test"
+ENV APPLICATION="prime_time"
 
 # Install dependencies
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \

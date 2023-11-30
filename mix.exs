@@ -10,6 +10,9 @@ defmodule Protohackers.MixProject do
       releases: [
         smoke_test: [
           applications: [smoke_test: :permanent]
+        ],
+        prime_time: [
+          applications: [prime_time: :permanent]
         ]
       ]
     ]
