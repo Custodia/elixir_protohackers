@@ -12,7 +12,7 @@ primary_region = "arn"
 
 [[services]]
   http_checks = []
-  internal_port = 4010
+  internal_port = 4020
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
@@ -21,13 +21,17 @@ primary_region = "arn"
     soft_limit = 80
     type = "connections"
 
-  #[[services.ports]]
-  #  handlers = []
-  #  port = "4000"
+  # [[services.ports]]
+  #   handlers = []
+  #   port = "4000"
+
+  # [[services.ports]]
+  #   handlers = []
+  #   port = "4010"
 
   [[services.ports]]
     handlers = []
-    port = "4010"
+    port = "4020"
 
   [[services.tcp_checks]]
     grace_period = "1s"

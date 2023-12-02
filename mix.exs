@@ -13,6 +13,9 @@ defmodule Protohackers.MixProject do
         ],
         prime_time: [
           applications: [prime_time: :permanent]
+        ],
+        price_server: [
+          applications: [price_server: :permanent]
         ]
       ]
     ]
